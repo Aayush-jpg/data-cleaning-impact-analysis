@@ -22,16 +22,16 @@ I analyzed tech salary data using three different cleaning strategies:
 
 ### Version B: Moderate Cleaning
 - Remove null values
-- Remove salaries < $30,000 (part-time/interns)
+- Remove salaries < $30,000
 - Remove salaries > $350,000 (extreme outliers)
-- **Result: Includes everyone from junior to senior roles**
+- **Scope: Retains salaries between the selected thresholds**
 
 ### Version C: Conservative Cleaning
 - Remove null values
-- Remove salaries < $40,000 (exclude entry-level)
-- Remove salaries > $110,000 (exclude senior/exec roles)
+- Remove salaries < $40,000
+- Remove salaries > $110,000
 - Remove top 3% (statistical outliers)
-- **Result: Typical mid-level employee range only**
+- **Scope: A narrower salary range; seniority is not established by these filters**
 
 ## The Results
 
@@ -41,29 +41,19 @@ I analyzed tech salary data using three different cleaning strategies:
 | **Moderate (B)** | $79,310 | $70,175 | 3,850 | 14% |
 | **Conservative (C)** | $78,944 | $68,000 | 3,200 | 29% |
 
-### The Same Question. Three Different Answers.
+### Interpreting the comparison
 
-The raw data says **$27.5 million** (obviously broken).  
-The moderate approach says **$79,310** (market competitive).  
-The conservative approach says **$68,000** (typical employee).
+The reported moderate and conservative **means** are $79,310 and $78,944, a difference of **$366**. Their **medians** are $70,175 and $68,000, a difference of **$2,175**.
 
-**Which one is "true"?**
-
-They all are. They're just answering different questions:
-- Raw: "What's the average of everything in the spreadsheet?" (Garbage in = garbage out)
-- Moderate: "What's a competitive salary across all levels?" (Good for market research)
-- Conservative: "What does a typical mid-level employee make?" (Good for budget planning)
+Compare means with means and medians with medians. Comparing $79,310 with $68,000 mixes two different statistics.
 
 ## Why This Matters
 
-If you're an HR manager setting salary bands:
-- Using the raw average ($27M): Your budget is nonsense
-- Using the moderate average ($79K): You'll compete for talent across all levels
-- Using the conservative average ($68K): You might underpay experienced hires
+Salary thresholds change which observations remain in the analysis. A salary cutoff alone cannot establish a person's seniority, employment type, or whether a record is an error.
 
-**A $11,310 difference in averages can cost or save your company hundreds of thousands of dollars.**
+The stricter version removes more observations without greatly changing the reported mean. That makes the exclusions themselves worth investigating: which groups were removed, and does the remaining sample still answer the original question?
 
-The data didn't change. Your assumptions did.
+The raw average should trigger a review of units, currencies, parsing, and extreme values before drawing conclusions.
 
 ## Key Insight
 
